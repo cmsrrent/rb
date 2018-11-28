@@ -33,7 +33,7 @@ while !(inFile.eof) do
 end
 
 if inFile.eof then
-	puts( "Completed processing......")
+	puts( "Completed processing.......")
 	puts ("#{inFileName} contained #{linecount} rows of SQL data")	
 end
 
