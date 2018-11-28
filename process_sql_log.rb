@@ -3,8 +3,8 @@
 # declare some variables
 inFileName = "input_sql.txt"
 outFileName = "output_sql.txt"
-startString = "+++SQLSTART+++"
-endString = "+++SQLEND+++"
+startString = "[++SQL"
+endString = "[--SQL"
 
 # open log file for reading
 inFile = File.new(inFileName, "r")
@@ -14,20 +14,21 @@ outFile = File.new(outFileName, "w")
 
 linecount = 0
 
-puts ("Processing log file.......")
+puts ("Processing log file......")
 
 # loop through inFile searching for SQL start and end tags
-# output just tags and everything in between to output file
+# output to file lines with tags and all lines in between
+# this will give the SQL debug statements needed
 while !(inFile.eof) do 	
 	c = inFile.gets
 	if (c.include? startString) then				
 		outFile.puts( c )
 		linecount += 1
-		until (c.include? endString) do	
+		begin
 			c = inFile.gets
 			linecount += 1
 			outFile.puts( c )			
-		end			
+		end	until (c.include? endString)
 	end	
 end
 
